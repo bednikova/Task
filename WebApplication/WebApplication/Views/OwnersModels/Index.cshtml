@@ -1,0 +1,70 @@
+﻿@model IEnumerable<WebApplication.Models.OwnersModels>
+ 
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<h2>Table</h2>
+
+
+
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+
+
+
+
+
+@using (Html.BeginForm("Index", "OwnersModels", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Owners
+        </th>
+        <th>
+            Models
+        </th>
+        <th>
+            Description
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owners.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.OwnersModelsId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.OwnersModelsId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.OwnersModelsId })
+            </td>
+         
+
+        </tr>
+    }
+
+</table>
+<br />
+
